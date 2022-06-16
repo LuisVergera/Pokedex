@@ -1,0 +1,9 @@
+body {
+  background-color: rgb(255, 197, 8);
+}
+
+#title {
+  margin: auto;
+  display: block;
+  text-align: center;
+}

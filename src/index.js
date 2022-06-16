@@ -3,7 +3,7 @@
 let requestOptions = {
   method: "GET",
   redirect: "follow",
-  headers: myHeaders,
+  //headers: myHeaders,
 };
 
 fetch("https://pokeapi.co/api/v2/pokemon/", requestOptions)
@@ -11,7 +11,7 @@ fetch("https://pokeapi.co/api/v2/pokemon/", requestOptions)
   .then((respuestaJSON) => {
     const pokemons = respuestaJSON["pokemon"];
     Object.keys(pokemons).forEach((pokemon) => {
-      $("ul").append($(`<li>${moneda}: ${respuestaJSON.rates[moneda]}</li>`));
+      $("ul").append($(`<div class="card">${result.pokemons[pokemon]}</div>`));
     });
   })
   .catch((error) => console.error("FALLÓ", error));

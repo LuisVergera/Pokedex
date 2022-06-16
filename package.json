@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/LuisVergera/Pokedex/issues"
   },
-  "homepage": "https://github.com/LuisVergera/Pokedex#readme"
+  "homepage": "https://github.com/LuisVergera/Pokedex#readme",
+  "devDependencies": {
+    "@types/jquery": "^3.5.14"
+  }
 }

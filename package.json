@@ -1,0 +1,19 @@
+{
+  "name": "pokedex",
+  "version": "1.0.0",
+  "description": "Pokedex app made for r/argentina-programa",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LuisVergera/Pokedex.git"
+  },
+  "author": "Luis Vergera",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LuisVergera/Pokedex/issues"
+  },
+  "homepage": "https://github.com/LuisVergera/Pokedex#readme"
+}

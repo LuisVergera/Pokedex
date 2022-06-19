@@ -15,3 +15,7 @@ fetch("https://pokeapi.co/api/v2/pokemon/", requestOptions)
     });
   })
   .catch((error) => console.error("FALLÓ", error));
+
+function createTestCard() {
+  $("ul").append($(`<div class="card"></div>`));
+}

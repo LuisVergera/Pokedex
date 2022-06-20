@@ -11,8 +11,8 @@ fetch("https://pokeapi.co/api/v2/pokemon/", requestOptions)
   .then((respuesta) => {
     const pokemons = respuesta.results;
     console.log(pokemons);
-    Object.keys(respuesta.results).forEach((name) => {
-      console.log(respuesta.results["name"]);
+    Object.keys(pokemons).forEach((pokemon) => {
+      console.log(pokemons[pokemon].name);
       //$("ul").append($(`<div class="card">${pokemon.pokemons[name]}</div>`));
     });
   })

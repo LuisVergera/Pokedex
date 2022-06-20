@@ -13,7 +13,11 @@ fetch("https://pokeapi.co/api/v2/pokemon/", requestOptions)
     console.log(pokemons);
     Object.keys(pokemons).forEach((pokemon) => {
       console.log(pokemons[pokemon].name);
-      //$("ul").append($(`<div class="card">${pokemon.pokemons[name]}</div>`));
+      $("#pokelist").append(
+        $(
+          `<div class="cards"><div class="card">${pokemons[pokemon].name}</div></div>`
+        )
+      );
     });
   })
   .catch((error) => console.error("FALLÓ", error));

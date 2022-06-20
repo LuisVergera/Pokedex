@@ -10,6 +10,19 @@ body {
   display: block;
   text-align: center;
 }
+.column {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
+
+.cards {
+  display: inline-block;
+  width: 200px;
+  padding: 2%;
+  border-radius: 15px;
+  margin: 20px;
+}
 
 /* From uiverse.io by @Clenio21 */
 .card {

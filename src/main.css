@@ -3,6 +3,9 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
+  font-family: "Open Sans", Helvetica, sans-serif;
+  text-align: center;
+  margin: 20px;
 }
 
 #title {
@@ -91,4 +94,13 @@ body {
 
 .card:active {
   --border-width: 5px;
+}
+
+/*modifique esto para que muestre solo los nombres*/
+.card {
+  text-align: center;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

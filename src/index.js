@@ -15,11 +15,12 @@ fetch("https://pokeapi.co/api/v2/pokemon/", requestOptions)
       console.log(pokemons[pokemon].name);
       $("#pokelist").append(
         $(
-          `<div class="cards"><div class="card">${pokemons[pokemon].name}</div></div>`
+          `<div class="cards"><div class="card" img=${pokemons[pokemon].url}>${pokemons[pokemon].name}</div></div>`
         )
       );
     });
   })
+
   .catch((error) => console.error("FALLÓ", error));
 
 function createTestCard() {

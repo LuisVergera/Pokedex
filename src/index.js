@@ -8,10 +8,11 @@ let requestOptions = {
 
 fetch("https://pokeapi.co/api/v2/pokemon/", requestOptions)
   .then((respuesta) => respuesta.json())
-  .then((respuestaJSON) => {
-    const pokemons = respuestaJSON["name"];
-    Object.keys(pokemons).forEach((results) => {
-      $("ul").append($(`<div class="card">${results.pokemons[name]}</div>`));
+  .then((respuesta) => {
+    //const pokemons = respuesta.name["name"];
+    Object.keys(respuesta).forEach((pokemon) => {
+      console.log(pokemon.name);
+      //$("ul").append($(`<div class="card">${pokemon.pokemons[name]}</div>`));
     });
   })
   .catch((error) => console.error("FALLÓ", error));

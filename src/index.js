@@ -9,9 +9,10 @@ let requestOptions = {
 fetch("https://pokeapi.co/api/v2/pokemon/", requestOptions)
   .then((respuesta) => respuesta.json())
   .then((respuesta) => {
-    //const pokemons = respuesta.name["name"];
-    Object.keys(respuesta).forEach((pokemon) => {
-      console.log(pokemon.name);
+    const pokemons = respuesta.results;
+    console.log(pokemons);
+    Object.keys(respuesta.results).forEach((name) => {
+      console.log(respuesta.results["name"]);
       //$("ul").append($(`<div class="card">${pokemon.pokemons[name]}</div>`));
     });
   })

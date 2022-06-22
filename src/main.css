@@ -15,14 +15,16 @@ body {
 }
 .conteiner {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  position: relative;
+  justify-content: space-between;
+  position: absolute;
+  flex-flow: column wrap;
   margin: 0 auto;
   flex-wrap: wrap;
 }
 #details {
+  position: relative;
   height: 200px;
   width: 300px;
   padding: 10px;
@@ -124,7 +126,7 @@ body {
 /*buscador*/
 
 .searchBox {
-  position: absolute;
+  position: relative;
   top: 20%;
   left: 50%;
   transform: translate(-50%, 50%);

@@ -1,4 +1,6 @@
 /// <reference types="jquery" />
+const URL = "https://pokeapi.co/api/v2/pokemon/";
+const $pokemons = $("#pokecard");
 
 let requestOptions = {
   method: "GET",
@@ -6,7 +8,7 @@ let requestOptions = {
   //headers: myHeaders,
 };
 
-fetch("https://pokeapi.co/api/v2/pokemon/", requestOptions)
+fetch(URL, requestOptions)
   .then((respuesta) => respuesta.json())
   .then((respuesta) => {
     const pokemons = respuesta.results;
@@ -15,7 +17,7 @@ fetch("https://pokeapi.co/api/v2/pokemon/", requestOptions)
       console.log(pokemons[pokemon].name);
       $("#pokelist").append(
         $(
-          `<div class="cards"><div class="card" img=${pokemons[pokemon].url}>${pokemons[pokemon].name}</div></div>`
+          `<div class="cards"><div class="card" id= "pokecard" img=${pokemons[pokemon].url}>${pokemons[pokemon].name}</div></div>`
         )
       );
     });
@@ -23,6 +25,18 @@ fetch("https://pokeapi.co/api/v2/pokemon/", requestOptions)
 
   .catch((error) => console.error("FALLÓ", error));
 
-function createTestCard() {
+/*function createTestCard() {
   $("ul").append($(`<div class="card"></div>`));
-}
+}*/
+
+$("#pokecard").on("click", () => {
+  getPokemonUrl();
+});
+
+let getPokemonUrl = () => {
+  console.log("click");
+};
+
+let displayPokemon = (pokemonUrl) => {
+  $("#conteiner").append(`<img src="${pokemonUrl.front_default}">`);
+};

@@ -9,27 +9,27 @@ body {
 }
 
 #title {
-  margin: auto;
-  display: block;
+  display: flex;
+  align-content: center;
+  margin: 0 auto;
   text-align: center;
 }
 .conteiner {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   position: absolute;
-  flex-flow: column wrap;
+  flex-flow: column;
   margin: 0 auto;
-  flex-wrap: wrap;
 }
 #details {
-  position: relative;
-  height: 200px;
+  height: 250px;
   width: 300px;
   padding: 10px;
   background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
+  margin: 0 auto;
 }
 .column {
   float: left;
@@ -126,15 +126,15 @@ body {
 /*buscador*/
 
 .searchBox {
-  position: relative;
-  top: 20%;
+  position: absolute;
+  top: 5%;
   left: 50%;
   transform: translate(-50%, 50%);
   background: #2f3640;
   height: 40px;
   border-radius: 40px;
   padding: 10px;
-  margin: 0;
+  margin: 0 auto;
 }
 
 .searchBox:hover > .searchInput {

@@ -13,6 +13,22 @@ body {
   display: block;
   text-align: center;
 }
+.conteiner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+#details {
+  height: 200px;
+  width: 300px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+}
 .column {
   float: left;
   width: 25%;
@@ -109,13 +125,14 @@ body {
 
 .searchBox {
   position: absolute;
-  top: 17%;
+  top: 20%;
   left: 50%;
   transform: translate(-50%, 50%);
   background: #2f3640;
   height: 40px;
   border-radius: 40px;
   padding: 10px;
+  margin: 0;
 }
 
 .searchBox:hover > .searchInput {

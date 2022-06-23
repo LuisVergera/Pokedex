@@ -1,6 +1,5 @@
 /// <reference types="jquery" />
 const URL = "https://pokeapi.co/api/v2/pokemon/";
-const $pokemons = $("#pokecard");
 
 let requestOptions = {
   method: "GET",
@@ -17,9 +16,14 @@ fetch(URL, requestOptions)
       console.log(pokemons[pokemon].name);
       $("#pokelist").append(
         $(
-          `<div class="cards"><div class="card" id= "pokecard" img=${pokemons[pokemon].url}>${pokemons[pokemon].name}</div></div>`
+          `<div class="cards"><div class="card" img=${pokemons[pokemon].url}>${pokemons[pokemon].name}</div></div>`
         )
       );
+    });
+  })
+  .then(() => {
+    $(".card").click(() => {
+      getPokemonUrl();
     });
   })
 
@@ -28,10 +32,6 @@ fetch(URL, requestOptions)
 /*function createTestCard() {
   $("ul").append($(`<div class="card"></div>`));
 }*/
-
-$("#pokecard").on("click", () => {
-  getPokemonUrl();
-});
 
 let getPokemonUrl = () => {
   console.log("click");

@@ -21,9 +21,10 @@ fetch(URL, requestOptions)
       );
     });
   })
-  .then(() => {
+  .then((respuesta) => {
     $(".card").click(() => {
-      getPokemonUrl();
+      //getPokemonUrl();
+      console.log(this[0]);
     });
   })
 
@@ -34,7 +35,7 @@ fetch(URL, requestOptions)
 }*/
 
 let getPokemonUrl = () => {
-  console.log("click");
+  console.log(pokemons[pokemon].url);
 };
 
 let displayPokemon = (pokemonUrl) => {

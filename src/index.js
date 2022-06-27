@@ -9,30 +9,33 @@ let requestOptions = {
   //headers: myHeaders,
 };
 
-fetch(URL, requestOptions)
-  .then((respuesta) => respuesta.json())
-  .then((respuesta) => {
-    const pokemons = respuesta.results;
-    console.log(pokemons);
-    Object.keys(pokemons).forEach((pokemon) => {
-      console.log(pokemons[pokemon].name);
+function fetchPokemons() {
+  fetch(URL, requestOptions)
+    .then((respuesta) => respuesta.json())
+    .then((respuesta) => {
+      const pokemons = respuesta.results;
+      console.log(pokemons);
+      Object.keys(pokemons).forEach((pokemon) => {
+        console.log(pokemons[pokemon].name);
 
-      $("#pokelist").append(
-        $(
-          `<div class="cards"><div class="card">${pokemons[pokemon].name}<a href="${pokemons[pokemon].url}"></a></div></div>`
-        )
-      );
-    });
+        $("#pokelist").append(
+          $(
+            `<div class="cards"><div class="card">${pokemons[pokemon].name}<a href="${pokemons[pokemon].url}"></a></div></div>`
+          )
+        );
+      });
 
-    $(".card").on("click", function () {
-      $("#details").empty();
-      let pokemonUrl = $("a", this).attr("href");
-      displayPokemon(pokemonUrl);
-      console.log(pokemonUrl);
-    });
-  })
+      $(".card").on("click", function () {
+        $("#details").empty();
+        let pokemonUrl = $("a", this).attr("href");
+        displayPokemon(pokemonUrl);
+        console.log(pokemonUrl);
+      });
+    })
 
-  .catch((error) => console.error("FALLÓ", error));
+    .catch((error) => console.error("FALLÓ", error));
+}
+fetchPokemons();
 
 let getPokemonUrl = () => {
   console.log(pokemons[pokemon].url);

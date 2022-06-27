@@ -18,12 +18,13 @@ fetch(URL, requestOptions)
 
       $("#pokelist").append(
         $(
-          `<div class="cards"><div class="card"><a href="${pokemons[pokemon].url}">${pokemons[pokemon].name}</a></div></div>`
+          `<div class="cards"><div class="card">${pokemons[pokemon].name}<a href="${pokemons[pokemon].url}"></a></div></div>`
         )
       );
     });
     $(".card").on("click", function () {
-      console.log(this).href;
+      var storyId = $("a", this).attr("href");
+      console.log(storyId);
     });
     /*.then((pokemons) => {
     $(".card").click(() => {

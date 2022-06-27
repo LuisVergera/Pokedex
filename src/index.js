@@ -1,5 +1,7 @@
 /// <reference types="jquery" />
 const URL = "https://pokeapi.co/api/v2/pokemon/";
+let nextUrl = URL.next;
+let previousUrl = URL.previous;
 
 let requestOptions = {
   method: "GET",
@@ -61,10 +63,14 @@ function pokemonTypes(pokemon) {
   });
   return pokeType;
 }
-
-function paginator() {
+/*
+function paginator(url) {
   let offset = 20;
-}
+
+  if (url != "null"){
+    if(url ==)
+  }
+}*/
 
 function deletePokemons() {
   $("#pokelist").empty();

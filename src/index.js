@@ -32,10 +32,6 @@ fetch(URL, requestOptions)
 
   .catch((error) => console.error("FALLÓ", error));
 
-/*function createTestCard() {
-  $("ul").append($(`<div class="card"></div>`));
-}*/
-
 let getPokemonUrl = () => {
   console.log(pokemons[pokemon].url);
 };
@@ -50,7 +46,7 @@ let displayPokemon = (pokemonUrl) => {
         <p>${res.name}</p>
         <p>Height: ${res.height}</p>
         <p>Weight: ${res.weight}</p>
-        <p>Type: ${pokemonTypes(res.types)[0]}</p>`
+        <p>Type: ${pokemonTypes(res.types)}</p>`
       );
     })
     .catch((error) => console.error("FALLÓ", error));
@@ -59,7 +55,17 @@ let displayPokemon = (pokemonUrl) => {
 let cards = document.querySelectorAll(".card");
 
 function pokemonTypes(pokemon) {
+  let pokeType = [];
   pokemon.forEach((element) => {
-    return element.type.name;
+    pokeType.push(element.type.name);
   });
+  return pokeType;
+}
+
+function paginator() {
+  let offset = 20;
+}
+
+function deletePokemons() {
+  $("#pokelist").empty();
 }

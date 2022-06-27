@@ -21,9 +21,10 @@ fetch(URL, requestOptions)
         )
       );
     });
+
     $(".card").on("click", function () {
       let pokemonUrl = $("a", this).attr("href");
-      displayPokemon();
+      displayPokemon(pokemonUrl);
       console.log(pokemonUrl);
     });
   })
@@ -42,7 +43,7 @@ let displayPokemon = (pokemonUrl) => {
   fetch(pokemonUrl)
     .then((res) => res.json())
     .then((res) => {
-      let pokeSprite = res.sprite;
+      let pokeSprite = res.sprites;
       $("#conteiner").append(`<img src="${pokeSprite.front_default}">`);
     })
     .catch((error) => console.error("FALLÓ", error));

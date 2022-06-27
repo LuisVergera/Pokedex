@@ -11,7 +11,6 @@ fetch(URL, requestOptions)
   .then((respuesta) => respuesta.json())
   .then((respuesta) => {
     const pokemons = respuesta.results;
-    const pokemonUrl = [];
     console.log(pokemons);
     Object.keys(pokemons).forEach((pokemon) => {
       console.log(pokemons[pokemon].name);
@@ -23,14 +22,10 @@ fetch(URL, requestOptions)
       );
     });
     $(".card").on("click", function () {
-      var storyId = $("a", this).attr("href");
-      console.log(storyId);
+      let pokemonUrl = $("a", this).attr("href");
+      displayPokemon();
+      console.log(pokemonUrl);
     });
-    /*.then((pokemons) => {
-    $(".card").click(() => {
-      //getPokemonUrl();
-      console.log($(this.url));
-    });*/
   })
 
   .catch((error) => console.error("FALLÓ", error));
@@ -44,7 +39,13 @@ let getPokemonUrl = () => {
 };
 
 let displayPokemon = (pokemonUrl) => {
-  $("#conteiner").append(`<img src="${pokemonUrl.front_default}">`);
+  fetch(pokemonUrl)
+    .then((res) => res.json())
+    .then((res) => {
+      let pokeSprite = res.sprite;
+      $("#conteiner").append(`<img src="${pokeSprite.front_default}">`);
+    })
+    .catch((error) => console.error("FALLÓ", error));
 };
 
 let cards = document.querySelectorAll(".card");

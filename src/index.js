@@ -23,6 +23,7 @@ fetch(URL, requestOptions)
     });
 
     $(".card").on("click", function () {
+      $("#details").empty();
       let pokemonUrl = $("a", this).attr("href");
       displayPokemon(pokemonUrl);
       console.log(pokemonUrl);
@@ -44,7 +45,13 @@ let displayPokemon = (pokemonUrl) => {
     .then((res) => res.json())
     .then((res) => {
       let pokeSprite = res.sprites;
-      $("#conteiner").append(`<img src="${pokeSprite.front_default}">`);
+      $("#details").append(
+        `<img src="${pokeSprite.front_default}" id="sprite">
+        <p>${res.name}</p>
+        <p>Height: ${res.height}</p>
+        <p>Weight: ${res.weight}</p>
+        <p>Type: ${res.types.type}</p>`
+      );
     })
     .catch((error) => console.error("FALLÓ", error));
 };

@@ -50,10 +50,16 @@ let displayPokemon = (pokemonUrl) => {
         <p>${res.name}</p>
         <p>Height: ${res.height}</p>
         <p>Weight: ${res.weight}</p>
-        <p>Type: ${res.types.type}</p>`
+        <p>Type: ${pokemonTypes(res.types)[0]}</p>`
       );
     })
     .catch((error) => console.error("FALLÓ", error));
 };
 
 let cards = document.querySelectorAll(".card");
+
+function pokemonTypes(pokemon) {
+  pokemon.forEach((element) => {
+    return element.type.name;
+  });
+}

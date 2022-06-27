@@ -11,21 +11,25 @@ fetch(URL, requestOptions)
   .then((respuesta) => respuesta.json())
   .then((respuesta) => {
     const pokemons = respuesta.results;
+    const pokemonUrl = [];
     console.log(pokemons);
     Object.keys(pokemons).forEach((pokemon) => {
       console.log(pokemons[pokemon].name);
+
       $("#pokelist").append(
         $(
-          `<div class="cards"><div class="card" img=${pokemons[pokemon].url}>${pokemons[pokemon].name}</div></div>`
+          `<div class="cards"><div class="card"><a href="${pokemons[pokemon].url}">${pokemons[pokemon].name}</a></div></div>`
         )
       );
     });
-  })
-  .then((respuesta) => {
+    $(".card").on("click", function () {
+      console.log(this).href;
+    });
+    /*.then((pokemons) => {
     $(".card").click(() => {
       //getPokemonUrl();
-      console.log(this[0]);
-    });
+      console.log($(this.url));
+    });*/
   })
 
   .catch((error) => console.error("FALLÓ", error));
@@ -41,3 +45,5 @@ let getPokemonUrl = () => {
 let displayPokemon = (pokemonUrl) => {
   $("#conteiner").append(`<img src="${pokemonUrl.front_default}">`);
 };
+
+let cards = document.querySelectorAll(".card");

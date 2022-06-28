@@ -1,7 +1,6 @@
 /// <reference types="jquery" />
 const URL = "https://pokeapi.co/api/v2/pokemon/";
-let nextUrl = URL.next;
-let previousUrl = URL.previous;
+let offset = 0;
 
 let requestOptions = {
   method: "GET",

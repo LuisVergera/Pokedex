@@ -9,7 +9,7 @@ let requestOptions = {
 };
 
 function fetchPokemons() {
-  fetch(URL, requestOptions)
+  fetch(URL + `?limit=20&offset=${offset}`)
     .then((respuesta) => respuesta.json())
     .then((respuesta) => {
       const pokemons = respuesta.results;

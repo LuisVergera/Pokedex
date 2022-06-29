@@ -3,10 +3,10 @@ const URL = "https://pokeapi.co/api/v2/pokemon/";
 let offset = 0;
 let offsetValue = 20; //the value offset increases or decreases on every page
 let cards = document.querySelectorAll(".card");
-//let pages = document.querySelectorAll(".page");
+let endpoint = `?limit=20&offset=${offset}`;
 
-function fetchPokemons() {
-  fetch(URL + `?limit=20&offset=${offset}`)
+function fetchPokemons(URL, endpoint) {
+  fetch(URL + endpoint)
     .then((respuesta) => respuesta.json())
     .then((respuesta) => {
       const pokemons = respuesta.results;
@@ -31,7 +31,7 @@ function fetchPokemons() {
 
     .catch((error) => console.error("FALLÓ", error));
 }
-fetchPokemons();
+fetchPokemons(URL, endpoint);
 
 let getPokemonUrl = () => {
   console.log(pokemons[pokemon].url);
@@ -63,7 +63,8 @@ function pokemonTypes(pokemon) {
 
 function paginatorHandler(pageNumber) {
   offset = (pageNumber - 1) * offsetValue;
-  return console.log(offset);
+  endpoint = `?limit=20&offset=${offset}`;
+  return endpoint;
 }
 
 function deletePokemons() {
@@ -72,4 +73,6 @@ function deletePokemons() {
 
 $(".page").on("click", function () {
   paginatorHandler(this.textContent);
+  deletePokemons();
+  fetchPokemons(URL, endpoint);
 });

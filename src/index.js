@@ -4,6 +4,7 @@ let offset = 0;
 let offsetValue = 20; //the value offset increases or decreases on every page
 let cards = document.querySelectorAll(".card");
 let endpoint = `?limit=20&offset=${offset}`;
+let activePageNumber = $("#active").text();
 
 function fetchPokemons(URL, endpoint) {
   fetch(URL + endpoint)
@@ -78,6 +79,7 @@ function deletePokemons() {
 function activePage(page) {
   $("#active").attr("id", "");
   $(page).attr("id", "active");
+  activePageNumber = $("#active").text();
 }
 
 $(".page").on("click", function () {
@@ -86,3 +88,12 @@ $(".page").on("click", function () {
   deletePokemons();
   fetchPokemons(URL, endpoint);
 });
+
+function prevOrNextButton(id) {
+  if (id === "next") {
+    activePageNumber = $("#active").text() + 1;
+    $("#active").attr("id", "");
+  } else if (id === "previous") {
+    activePageNumber = $("#active").text() - 1;
+  }
+}

@@ -1,12 +1,7 @@
 /// <reference types="jquery" />
 const URL = "https://pokeapi.co/api/v2/pokemon/";
 let offset = 0;
-
-let requestOptions = {
-  method: "GET",
-  redirect: "follow",
-  //headers: myHeaders,
-};
+let cards = document.querySelectorAll(".card");
 
 function fetchPokemons() {
   fetch(URL + `?limit=20&offset=${offset}`)
@@ -55,8 +50,6 @@ let displayPokemon = (pokemonUrl) => {
     })
     .catch((error) => console.error("FALLÓ", error));
 };
-
-let cards = document.querySelectorAll(".card");
 
 function pokemonTypes(pokemon) {
   let pokeType = [];

@@ -71,7 +71,13 @@ function deletePokemons() {
   $("#pokelist").empty();
 }
 
+function activePage(page) {
+  $("#active").attr("id", "");
+  $(page).attr("id", "active");
+}
+
 $(".page").on("click", function () {
+  activePage(this);
   paginatorHandler(this.textContent);
   deletePokemons();
   fetchPokemons(URL, endpoint);

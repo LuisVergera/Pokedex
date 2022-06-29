@@ -16,7 +16,11 @@ function fetchPokemons(URL, endpoint) {
 
         $("#pokelist").append(
           $(
-            `<div class="cards"><div class="card">${pokemons[pokemon].name}<a href="${pokemons[pokemon].url}"></a></div></div>`
+            `<div class="cards"><div class="card">${pokemons[
+              pokemon
+            ].name.toUpperCase()}<a href="${
+              pokemons[pokemon].url
+            }"></a></div></div>`
           )
         );
       });
@@ -44,7 +48,7 @@ let displayPokemon = (pokemonUrl) => {
       let pokeSprite = res.sprites;
       $("#details").append(
         `<img src="${pokeSprite.front_default}" id="sprite">
-        <p>${res.name}</p>
+        <p>${res.name.toUpperCase()}</p>
         <p>Height: ${res.height}</p>
         <p>Weight: ${res.weight}</p>
         <p>Type: ${pokemonTypes(res.types)}</p>`

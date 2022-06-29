@@ -183,6 +183,7 @@ body {
 /*pagination*/
 .pagination a {
   color: black;
+  margin: 3% auto;
   background-color: #fff;
   float: left;
   padding: 8px 16px;

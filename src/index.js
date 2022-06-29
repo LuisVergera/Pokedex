@@ -1,7 +1,9 @@
 /// <reference types="jquery" />
 const URL = "https://pokeapi.co/api/v2/pokemon/";
 let offset = 0;
+let offsetValue = 20; //the value offset increases or decreases on every page
 let cards = document.querySelectorAll(".card");
+//let pages = document.querySelectorAll(".page");
 
 function fetchPokemons() {
   fetch(URL + `?limit=20&offset=${offset}`)
@@ -58,15 +60,16 @@ function pokemonTypes(pokemon) {
   });
   return pokeType;
 }
-/*
-function paginator(url) {
-  let offset = 20;
 
-  if (url != "null"){
-    if(url ==)
-  }
-}*/
+function paginatorHandler(pageNumber) {
+  offset = (pageNumber - 1) * offsetValue;
+  return console.log(offset);
+}
 
 function deletePokemons() {
   $("#pokelist").empty();
 }
+
+$(".page").on("click", function () {
+  paginatorHandler(this.textContent);
+});

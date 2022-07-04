@@ -141,6 +141,7 @@ async function asyncCall() {
   console.log("calling");
   await resolveAfter2Seconds();
   setTimeout(function () {
+    hideLoader();
     createPaginator(numberOfPokemons, pokemonsPerPage);
     asignFirstPage();
     paginatorMain();
@@ -160,4 +161,8 @@ function paginatorMain() {
 
 function asignFirstPage() {
   $(".page:first").attr("id", "active");
+}
+
+function hideLoader() {
+  $(".loader").attr("id", "hide");
 }

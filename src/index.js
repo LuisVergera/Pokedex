@@ -122,15 +122,6 @@ $("#next").click(() => {
   fetchPokemons(URL, endpoint);
 });
 
-/*
-$("#prev").click(() => {
-  let prev = $("#prev").get(0).id;
-  prevOrNextButton(prev);
-
-  paginatorHandler(activePageNumber);
-  fetchPokemons(URL, endpoint);
-});*/
-
 //loader
 function resolveAfter2Seconds() {
   return new Promise((resolve) => {

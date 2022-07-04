@@ -92,6 +92,7 @@ function activePage(page) {
   $("#active").attr("id", "");
   $(page).attr("id", "active");
   activePageNumber = $("#active").text();
+  return activePageNumber;
 }
 
 function prevOrNextButton(id) {
@@ -110,8 +111,10 @@ function prevOrNextButton(id) {
 
 $("#prev").click(() => {
   let newActive = $("#active").prev();
+  //let newActiveNumber = newActive.text();
   activePage(newActive);
   paginatorHandler(activePageNumber);
+  deletePokemons();
   fetchPokemons(URL, endpoint);
 });
 
@@ -119,6 +122,7 @@ $("#next").click(() => {
   let newActive = $("#active").next();
   activePage(newActive);
   paginatorHandler(activePageNumber);
+  deletePokemons();
   fetchPokemons(URL, endpoint);
 });
 

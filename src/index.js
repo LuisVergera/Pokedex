@@ -7,41 +7,47 @@ let endpoint = `?limit=20&offset=${offset}`;
 let activePageNumber = 1; //$("#active").text();
 let numberOfPokemons;
 let pokemonsPerPage;
+let pokemons;
 
-function fetchPokemons(URL, endpoint) {
-  fetch(URL + endpoint)
-    .then((respuesta) => respuesta.json())
-    .then((respuesta) => {
-      if (respuesta.previous != null || respuesta.next != null) {
-        const pokemons = respuesta.results;
-        numberOfPokemons = respuesta.count;
-        pokemonsPerPage = pokemons.length;
-
-        Object.keys(pokemons).forEach((pokemon) => {
-          $("#pokelist").append(
-            $(
-              `<div class="cards"><div class="card">${pokemons[
-                pokemon
-              ].name.toUpperCase()}<a href="${
-                pokemons[pokemon].url
-              }"></a></div></div>`
-            )
-          );
-        });
-
-        $(".card").on("click", function () {
-          $("#details").empty();
-          let pokemonUrl = $("a", this).attr("href");
-          displayPokemon(pokemonUrl);
-        });
-      }
-    })
-
-    .catch((error) => console.error("FALLÓ", error));
+async function initializePokedex() {
+  await fetchPokemons(URL, endpoint);
+  createPokemonCards(pokemons);
 }
+
+initializePokedex();
+
+async function fetchPokemons(URL, endpoint) {
+  const response = await fetch(URL + endpoint);
+  const responseJSON = await response.json();
+  pokemons = responseJSON.results;
+  numberOfPokemons = responseJSON.count;
+  pokemonsPerPage = pokemons.length;
+
+  return pokemons;
+}
+
+function createPokemonCards(pokemons) {
+  Object.keys(pokemons).forEach((pokemon) => {
+    $("#pokelist").append(
+      $(
+        `<div class="cards"><div class="card">${pokemons[
+          pokemon
+        ].name.toUpperCase()}<a href="${
+          pokemons[pokemon].url
+        }"></a></div></div>`
+      )
+    );
+  });
+  $(".card").on("click", function () {
+    $("#details").empty();
+    let pokemonUrl = $("a", this).attr("href");
+    displayPokemon(pokemonUrl);
+  });
+}
+
 //fetchPokemons(URL, endpoint);
 
-let displayPokemon = (pokemonUrl) => {
+function displayPokemon(pokemonUrl) {
   fetch(pokemonUrl)
     .then((res) => res.json())
     .then((res) => {
@@ -55,7 +61,7 @@ let displayPokemon = (pokemonUrl) => {
       );
     })
     .catch((error) => console.error("FALLÓ", error));
-};
+}
 
 function pokemonTypes(pokemon) {
   let pokeType = [];
@@ -104,21 +110,23 @@ function prevOrNextButton(id) {
   }
 }
 
-$("#prev").click(() => {
+$("#prev").click(async () => {
   let newActive = $("#active").prev();
   activePage(newActive);
   paginatorHandler(activePageNumber);
   deletePokemons();
-  fetchPokemons(URL, endpoint);
+  await fetchPokemons(URL, endpoint);
+  createPokemonCards(pokemons);
   hidePrevAndNext();
 });
 
-$("#next").click(() => {
+$("#next").click(async () => {
   let newActive = $("#active").next();
   activePage(newActive);
   paginatorHandler(activePageNumber);
   deletePokemons();
-  fetchPokemons(URL, endpoint);
+  await fetchPokemons(URL, endpoint);
+  createPokemonCards(pokemons);
   hidePrevAndNext();
 });
 
@@ -143,11 +151,12 @@ async function asyncCall() {
 asyncCall();
 
 function paginatorMain() {
-  $(".page").on("click", function () {
+  $(".page").on("click", async function () {
     activePage(this);
     paginatorHandler(this.textContent);
     deletePokemons();
-    fetchPokemons(URL, endpoint);
+    await fetchPokemons(URL, endpoint);
+    createPokemonCards(pokemons);
     hidePrevAndNext();
   });
 }
@@ -179,4 +188,5 @@ $(".searchButton").click(() => {
   let pokemonUrl = URL + $(".searchInput").val();
   $("#details").empty();
   displayPokemon(pokemonUrl);
+  return false;
 });

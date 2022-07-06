@@ -137,7 +137,6 @@ async function asyncCall() {
     hideLoader();
     createPaginator(numberOfPokemons, pokemonsPerPage);
     asignFirstPage();
-
     paginatorMain();
   }, 100);
 }
@@ -175,3 +174,9 @@ function hidePrevAndNext() {
 }
 
 hidePrevAndNext();
+
+$(".searchButton").click(() => {
+  let pokemonUrl = URL + $(".searchInput").val();
+  $("#details").empty();
+  displayPokemon(pokemonUrl);
+});

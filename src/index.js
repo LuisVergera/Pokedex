@@ -4,7 +4,7 @@ let offset = 0;
 let offsetValue = 20; //the value offset increases or decreases on every page
 let cards = document.querySelectorAll(".card");
 let endpoint = `?limit=20&offset=${offset}`;
-let activePageNumber = $("#active").text();
+let activePageNumber = 1; //$("#active").text();
 let numberOfPokemons;
 let pokemonsPerPage;
 
@@ -14,9 +14,9 @@ function fetchPokemons(URL, endpoint) {
     .then((respuesta) => {
       if (respuesta.previous != null || respuesta.next != null) {
         const pokemons = respuesta.results;
-        console.log(respuesta.count);
         numberOfPokemons = respuesta.count;
         pokemonsPerPage = pokemons.length;
+
         Object.keys(pokemons).forEach((pokemon) => {
           $("#pokelist").append(
             $(
@@ -33,7 +33,6 @@ function fetchPokemons(URL, endpoint) {
           $("#details").empty();
           let pokemonUrl = $("a", this).attr("href");
           displayPokemon(pokemonUrl);
-          console.log(pokemonUrl);
         });
       }
     })
@@ -41,10 +40,6 @@ function fetchPokemons(URL, endpoint) {
     .catch((error) => console.error("FALLÓ", error));
 }
 //fetchPokemons(URL, endpoint);
-
-let getPokemonUrl = () => {
-  console.log(pokemons[pokemon].url);
-};
 
 let displayPokemon = (pokemonUrl) => {
   fetch(pokemonUrl)
@@ -102,22 +97,20 @@ function prevOrNextButton(id) {
     activePageNumber = $("#active").text() + 1;
     $("#active").attr("id", "");
     return activePageNumber;
-    //activePage(activePageNumber);
   } else if (id === "prev") {
     activePageNumber = $("#active").text() - 1;
     $("#active").attr("id", "");
     return activePage(activePageNumber);
-    //activePage(activePageNumber);
   }
 }
 
 $("#prev").click(() => {
   let newActive = $("#active").prev();
-  //let newActiveNumber = newActive.text();
   activePage(newActive);
   paginatorHandler(activePageNumber);
   deletePokemons();
   fetchPokemons(URL, endpoint);
+  hidePrevAndNext();
 });
 
 $("#next").click(() => {
@@ -126,6 +119,7 @@ $("#next").click(() => {
   paginatorHandler(activePageNumber);
   deletePokemons();
   fetchPokemons(URL, endpoint);
+  hidePrevAndNext();
 });
 
 //loader
@@ -138,15 +132,14 @@ function resolveAfter2Seconds() {
 }
 
 async function asyncCall() {
-  console.log("calling");
   await resolveAfter2Seconds();
   setTimeout(function () {
     hideLoader();
     createPaginator(numberOfPokemons, pokemonsPerPage);
     asignFirstPage();
+
     paginatorMain();
   }, 100);
-  console.log("test");
 }
 asyncCall();
 
@@ -156,6 +149,7 @@ function paginatorMain() {
     paginatorHandler(this.textContent);
     deletePokemons();
     fetchPokemons(URL, endpoint);
+    hidePrevAndNext();
   });
 }
 
@@ -164,5 +158,20 @@ function asignFirstPage() {
 }
 
 function hideLoader() {
-  $(".loader").attr("id", "hide");
+  $(".loader").attr("class", "hide");
 }
+
+function hidePrevAndNext() {
+  if (activePageNumber == 1) {
+    $("#prev").attr("class", "hide");
+    $("#next").attr("class", "");
+  } else if (activePageNumber == 58) {
+    $("#next").attr("class", "hide");
+    $("#prev").attr("class", "");
+  } else {
+    $("#prev").attr("class", "");
+    $("#next").attr("class", "");
+  }
+}
+
+hidePrevAndNext();

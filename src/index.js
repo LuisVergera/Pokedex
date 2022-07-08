@@ -8,13 +8,14 @@ let activePageNumber = 1; //$("#active").text();
 let numberOfPokemons;
 let pokemonsPerPage;
 let pokemons;
+let pokemon;
+
+//functions
 
 async function initializePokedex() {
   await fetchPokemons(URL, endpoint);
   createPokemonCards(pokemons);
 }
-
-initializePokedex();
 
 async function fetchPokemons(URL, endpoint) {
   const response = await fetch(URL + endpoint);
@@ -38,29 +39,35 @@ function createPokemonCards(pokemons) {
       )
     );
   });
-  $(".card").on("click", function () {
+  handleCards();
+}
+
+function handleCards() {
+  $(".card").on("click", async function () {
     $("#details").empty();
     let pokemonUrl = $("a", this).attr("href");
-    displayPokemon(pokemonUrl);
+    pokemon = await fetchSinglePokemon(pokemonUrl);
+    displayPokemon(pokemon);
   });
 }
 
-//fetchPokemons(URL, endpoint);
+async function fetchSinglePokemon(pokemonURL) {
+  let response = await fetch(pokemonURL);
+  response = response.json();
 
-function displayPokemon(pokemonUrl) {
-  fetch(pokemonUrl)
-    .then((res) => res.json())
-    .then((res) => {
-      let pokeSprite = res.sprites;
-      $("#details").append(
-        `<img src="${pokeSprite.front_default}" id="sprite">
-        <p>${res.name.toUpperCase()}</p>
-        <p>Height: ${res.height}</p>
-        <p>Weight: ${res.weight}</p>
-        <p>Type: ${pokemonTypes(res.types)}</p>`
-      );
-    })
-    .catch((error) => console.error("FALLÓ", error));
+  return response;
+}
+
+async function displayPokemon(pokemon) {
+  let resPokemon = await pokemon;
+  let pokeSprite = resPokemon.sprites;
+  $("#details").append(
+    `<img src="${pokeSprite.front_default}" id="sprite">
+        <p>${resPokemon.name.toUpperCase()}</p>
+        <p>Height: ${resPokemon.height}</p>
+        <p>Weight: ${resPokemon.weight}</p>
+        <p>Type: ${pokemonTypes(resPokemon.types)}</p>`
+  );
 }
 
 function pokemonTypes(pokemon) {
@@ -74,8 +81,6 @@ function pokemonTypes(pokemon) {
 function deletePokemons() {
   $("#pokelist").empty();
 }
-
-//paginator
 
 function createPaginator(number, pokemons) {
   let pageNumber = number / pokemons;
@@ -110,27 +115,6 @@ function prevOrNextButton(id) {
   }
 }
 
-$("#prev").click(async () => {
-  let newActive = $("#active").prev();
-  activePage(newActive);
-  paginatorHandler(activePageNumber);
-  deletePokemons();
-  await fetchPokemons(URL, endpoint);
-  createPokemonCards(pokemons);
-  hidePrevAndNext();
-});
-
-$("#next").click(async () => {
-  let newActive = $("#active").next();
-  activePage(newActive);
-  paginatorHandler(activePageNumber);
-  deletePokemons();
-  await fetchPokemons(URL, endpoint);
-  createPokemonCards(pokemons);
-  hidePrevAndNext();
-});
-
-//loader
 function resolveAfter2Seconds() {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -148,7 +132,6 @@ async function asyncCall() {
     paginatorMain();
   }, 100);
 }
-asyncCall();
 
 function paginatorMain() {
   $(".page").on("click", async function () {
@@ -182,11 +165,41 @@ function hidePrevAndNext() {
   }
 }
 
-hidePrevAndNext();
+function main() {
+  initializePokedex();
+  asyncCall();
+  hidePrevAndNext();
+}
 
-$(".searchButton").click(() => {
-  let pokemonUrl = URL + $(".searchInput").val();
-  $("#details").empty();
-  displayPokemon(pokemonUrl);
-  return false;
+//events
+
+$("#prev").click(async () => {
+  let newActive = $("#active").prev();
+  activePage(newActive);
+  paginatorHandler(activePageNumber);
+  deletePokemons();
+  await fetchPokemons(URL, endpoint);
+  createPokemonCards(pokemons);
+  hidePrevAndNext();
 });
+
+$("#next").click(async () => {
+  let newActive = $("#active").next();
+  activePage(newActive);
+  paginatorHandler(activePageNumber);
+  deletePokemons();
+  await fetchPokemons(URL, endpoint);
+  createPokemonCards(pokemons);
+  hidePrevAndNext();
+});
+
+$(".searchButton").click(async (event) => {
+  event.preventDefault();
+  let pokemonUrl = URL + $(".searchInput").val();
+  pokemon = await fetchSinglePokemon(pokemonUrl);
+  $("#details").empty();
+  displayPokemon(pokemon);
+});
+
+//main call
+main();

@@ -21,6 +21,7 @@
   "homepage": "https://github.com/LuisVergera/Pokedex#readme",
   "devDependencies": {
     "@types/jquery": "^3.5.14",
-    "cypress": "^10.3.0"
+    "cypress": "^10.3.0",
+    "eslint": "^8.19.0"
   }
 }

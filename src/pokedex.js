@@ -6,6 +6,9 @@ import {
   endpoint,
   fetchPokemons,
   fetchSinglePokemon,
+  pokemons,
+  pokemonsPerPage,
+  numberOfPokemons,
 } from "./api/pokemon.js";
 import displayPokemon from "./ui/pokemon.js";
 import {
@@ -17,9 +20,7 @@ import {
   hidePrevAndNext,
   activePageNumber,
 } from "./ui/paginator.js";
-let numberOfPokemons;
-let pokemonsPerPage;
-let pokemons;
+
 let pokemon;
 
 //functions

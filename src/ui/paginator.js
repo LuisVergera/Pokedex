@@ -1,3 +1,9 @@
+import { URL, endpoint, fetchPokemons, pokemons } from "../api/pokemon.js";
+
+import { paginatorHandler } from "../api/pokemon.js";
+
+import { deletePokemons, createPokemonCards } from "../pokedex.js";
+
 export let activePageNumber = 1;
 
 export function createPaginator(number, pokemons) {
@@ -7,12 +13,12 @@ export function createPaginator(number, pokemons) {
     $("#next").before(`<a class="page" id="" href="#">${i}</a>`);
   }
 }
-
+/*
 export function paginatorHandler(pageNumber) {
   offset = (pageNumber - 1) * offsetValue;
   endpoint = `?limit=20&offset=${offset}`;
   return endpoint;
-}
+}*/
 
 export function activePage(page) {
   $("#active").attr("id", "");

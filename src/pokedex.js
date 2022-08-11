@@ -1,19 +1,17 @@
 /// <reference types="jquery" />
 import {
   URL,
-  offset,
-  offsetValue,
   endpoint,
   fetchPokemons,
   fetchSinglePokemon,
   pokemons,
   pokemonsPerPage,
   numberOfPokemons,
+  paginatorHandler,
 } from "./api/pokemon.js";
 import displayPokemon from "./ui/pokemon.js";
 import {
   createPaginator,
-  paginatorHandler,
   activePage,
   paginatorMain,
   asignFirstPage,
@@ -30,7 +28,7 @@ async function initializePokedex() {
   createPokemonCards(pokemons);
 }
 
-function createPokemonCards(pokemons) {
+export function createPokemonCards(pokemons) {
   Object.keys(pokemons).forEach((pokemon) => {
     $("#pokelist").append(
       $(
@@ -54,7 +52,7 @@ function handleCards() {
   });
 }
 
-function deletePokemons() {
+export function deletePokemons() {
   $("#pokelist").empty();
 }
 

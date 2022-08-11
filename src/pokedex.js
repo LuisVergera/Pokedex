@@ -17,7 +17,6 @@ import {
   hidePrevAndNext,
   activePageNumber,
 } from "./ui/paginator.js";
-let activePageNumber = 1;
 let numberOfPokemons;
 let pokemonsPerPage;
 let pokemons;
@@ -115,5 +114,3 @@ $(".searchButton").click(async (event) => {
   $("#details").empty();
   displayPokemon(pokemon);
 });
-
-//main(); /*as
